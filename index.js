@@ -1,16 +1,13 @@
-//Create two variables, firstCard and secondCard and set their values to a random number between 2-11
-
-let firstCard = getRandomCard();
-let secondCard = getRandomCard();
 let cardsEl = document.getElementById("cards-el");
-let cards = [firstCard, secondCard] //Array - ordered list of items
+let cards = [] //Array - ordered list of items
+
 //Create a variable hasBlackjack as a Cash out!
 
 let hasBlackjack = false;
 
-//Create a variable called isAlive and assign it to true
+//Create a variable called isAlive and assign it to false before touching the start game button
 
-let isAlive = true;
+let isAlive = false;
 
 //Create a variable called message and assign it a value that is an empty string
 
@@ -23,7 +20,7 @@ let messageEl = document.querySelector("#message-el");
 //Create a variable sum and set it to the sum of the two cards
 
 let sumEl = document.getElementById("sum-el");
-let sum = firstCard + secondCard;
+let sum = 0;
 
 //Create the function that generate a random number
 
@@ -42,7 +39,13 @@ function getRandomCard() {
 
 //Onclick button calling a function startGame()
 function startGame() {
+    isAlive = true;
+    let firstCard = getRandomCard();
+    let secondCard = getRandomCard();
+    cards = [firstCard, secondCard];
+    sum = firstCard + secondCard;
     renderGame();
+    
 }
 
 function renderGame() {
@@ -65,10 +68,13 @@ function renderGame() {
 };
 
 function newCard() {
-    let draw = getRandomCard();
-    sum += draw;
-    cards.push(draw) //Push the new card to the cards array
-    renderGame();
+    //Only allow the player to get a new card if isAlive = true
+    if (isAlive === true) {
+        let draw = getRandomCard();
+        sum += draw;
+        cards.push(draw) //Push the new card to the cards array
+        renderGame();
+    }
 };
 
 
