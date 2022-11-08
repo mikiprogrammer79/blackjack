@@ -1,7 +1,7 @@
 //Create two variables, firstCard and secondCard and set their values to a random number between 2-11
 
-let firstCard = 6;
-let secondCard = 4;
+let firstCard = getRandomCard();
+let secondCard = getRandomCard();
 let cardsEl = document.getElementById("cards-el");
 let cards = [firstCard, secondCard] //Array - ordered list of items
 //Create a variable hasBlackjack as a Cash out!
@@ -25,6 +25,21 @@ let messageEl = document.querySelector("#message-el");
 let sumEl = document.getElementById("sum-el");
 let sum = firstCard + secondCard;
 
+//Create the function that generate a random number
+
+function getRandomCard() {
+    //if AS(1) return 11
+    //if J(11), Q(12) or K(13) return 10
+    num = Math.floor((Math.random() *13) + 1);
+    if (num === 1) {
+        return 11;
+    } else if (num > 1 && num < 10) {
+        return num;
+    }else if (num >= 10) {
+        return 10;
+    };
+};
+
 //Onclick button calling a function startGame()
 function startGame() {
     renderGame();
@@ -43,12 +58,16 @@ function renderGame() {
 
     messageEl.textContent = message;
     sumEl.textContent = "Score: " + sum;
-    cardsEl.textContent = "Cards: " + cards[0] + " , " + cards[1];
+    cardsEl.textContent = "Cards: ";
+    for (let i = 0; i < cards.length; i++) {
+        cardsEl.textContent += cards[i] + ", ";
+    }
 };
 
 function newCard() {
-    let draw = 11;
+    let draw = getRandomCard();
     sum += draw;
+    cards.push(draw) //Push the new card to the cards array
     renderGame();
 };
 
