@@ -22,6 +22,17 @@ let messageEl = document.querySelector("#message-el");
 let sumEl = document.getElementById("sum-el");
 let sum = 0;
 
+//Create an object called player
+
+let player = {
+
+    name: "Miki",
+    chips: 200
+};
+
+let playerEl = document.getElementById("player-el");
+playerEl.textContent = player.name + ": $" + player.chips; 
+
 //Create the function that generate a random number
 
 function getRandomCard() {
